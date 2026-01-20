@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 3rem;
+      background: linear-gradient(to right, #4ade80, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .header p {
+      color: #94a3b8;
+      font-size: 1.2rem;
+    }
+    .timeline {
+      position: relative;
+      padding-left: 60px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #4ade80, #10b981, #a78bfa, #f59e0b);
+    }
+    .block {
+      position: relative;
+      margin-bottom: 30px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 20px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .block:hover {
+      transform: translateX(5px);
+      box-shadow: 0 8px 24px rgba(74, 222, 128, 0.2);
+    }
+    .block::before {
+      content: '';
+      position: absolute;
+      left: -48px;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 3px solid #0f172a;
+    }
+    .block.morning::before { background: #4ade80; }
+    .block.deep1::before { background: #10b981; }
+    .block.meal1::before { background: #60a5fa; }
+    .block.work::before { background: #f59e0b; }
+    .block.meal2::before { background: #a78bfa; }
+    .block.deep2::before { background: #ec4899; }
+    .time {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4ade80;
+      margin-bottom: 8px;
+    }
+    .title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: white;
+    }
+    .desc {
+      color: #94a3b8;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+    .desc ul {
+      margin-top: 8px;
+      margin-left: 20px;
+    }
+    .desc li {
+      margin-bottom: 4px;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      border: 1px solid #475569;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-card .number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4ade80;
+      margin-bottom: 5px;
+    }
+    .stat-card .label {
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    .rules {
+      background: linear-gradient(to right, #f59e0b, #ea580c);
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    .rules h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    .rules p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .icon {
+      font-size: 1.5rem;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>The $1M Daily Schedule</h1>
+      <p>Mon-Fri Blueprint | 12 Months to $1M Net Worth</p>
+    </div>
+
+    <div class="timeline">
+      <div class="block morning">
+        <div class="time">7:00am - 9:00am</div>
+        <div class="title"><span class="icon">💪</span>Morning Routine</div>
+        <div class="desc">
+          <ul>
+            <li>Coffee & light stretch (15 min)</li>
+            <li>GYM - lift heavy, no phone (1 hr)</li>
+            <li>Shower & get ready (30 min)</li>
+          </ul>
+          <strong>Why:</strong> Sets tone for day. Energy + focus locked in.
+        </div>
+      </div>
+
+      <div class="block deep1">
+        <div class="time">9:00am - 11:00am</div>
+        <div class="title"><span class="icon">🧠</span>Deep Work Block #1</div>
+        <div class="desc">
+          <ul>
+            <li><strong>Month 1-2:</strong> Recruiting (screening calls, interviews, training docs)</li>
+            <li><strong>Month 2-4:</strong> Course creation (film, edit, upload modules)</li>
+            <li><strong>Month 3+:</strong> Content batching (7 posts for the week)</li>
+          </ul>
+          <strong>Rule:</strong> No phone, no distractions, door closed. This is where you build the subscription business.
+        </div>
+      </div>
+
+      <div class="block meal1">
+        <div class="time">11:00am - 12:00pm</div>
+        <div class="title"><span class="icon">🍳</span>Meal 1 + Commute</div>
+        <div class="desc">
+          <ul>
+            <li>Big protein meal (30 min) - fuel for 7.5 hrs</li>
+            <li>Commute to territory (30 min)</li>
+          </ul>
+          <strong>Mental switch:</strong> Business builder → Sales machine
+        </div>
+      </div>
+
+      <div class="block work">
+        <div class="time">12:00pm - 8:00pm</div>
+        <div class="title"><span class="icon">🚪</span>Knocking + Commute</div>
+        <div class="desc">
+          <ul>
+            <li>Knocking doors: 12:00pm - 7:30pm (7.5 hrs)</li>
+            <li>Commute home: 7:30pm - 8:00pm (30 min)</li>
+          </ul>
+          <strong>Target:</strong> 10 sales/week (2 per day average). Phone on airplane mode. Pure execution. This funds everything.
+        </div>
+      </div>
+
+      <div class="block meal2">
+        <div class="time">8:00pm - 10:00pm</div>
+        <div class="title"><span class="icon">🍽️</span>Meal 2 + Personal Time</div>
+        <div class="desc">
+          <ul>
+            <li>Big dinner - decompress, relax (1 hr)</li>
+            <li>Watch something, hang out, totally off (1 hr)</li>
+          </ul>
+          <strong>This is your reward.</strong> Brain needs to reset before evening work.
+        </div>
+      </div>
+
+      <div class="block deep2">
+        <div class="time">10:00pm - 12:00am</div>
+        <div class="title"><span class="icon">🔥</span>Deep Work Block #2</div>
+        <div class="desc">
+          <ul>
+            <li>Post daily content (5 min)</li>
+            <li>Reply to comments/DMs (15 min)</li>
+            <li>Course work / Admin / Recruiting (1 hr 20 min)</li>
+            <li>Planning tomorrow (20 min)</li>
+          </ul>
+          <strong>Why evening:</strong> You're too fried to knock more doors, but sharp enough for strategy work.
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-card">
+        <div class="number">4</div>
+        <div class="label">Hours Deep Work</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">7.5</div>
+        <div class="label">Hours Knocking</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">1</div>
+        <div class="label">Hour Gym</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">2</div>
+        <div class="label">Hours Personal</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">7</div>
+        <div class="label">Hours Sleep</div>
+      </div>
+    </div>
+
+    <div class="rules">
+      <h2>🔥 Non-Negotiable Rules</h2>
+      <p><strong>Morning Deep Work (9-11am) is sacred.</strong> This is where the million dollars gets built. No calls, no texts, no "quick questions" from team.</p>
+      <p><strong>10 sales/week minimum.</strong> That's 2 per day average. Some days you'll get 3-4, some days 0-1. Hit 10 by Friday or work Saturday morning.</p>
+      <p><strong>Evening deep work (10pm-12am) is flexible.</strong> If you're exhausted, use it for light admin. If you're energized, crush course work.</p>
+      <p><strong>Weekends:</strong> 7-9am gym (every day), 9am-12pm deep work (3 hrs). Fully free from 12pm onwards Saturday & Sunday.</p>
+      <p><strong>Total weekly commitment:</strong> 26 hrs deep work (10 hrs weekdays + 6 hrs weekend) + 37.5 hrs knocking + 7 hrs gym = 70.5 hrs total work.</p>
+    </div>
+  </div>
+</body>
+</html>
