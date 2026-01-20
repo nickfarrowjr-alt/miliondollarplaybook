@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .header { margin-bottom: 30px; }
+    .header h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(to right, #4ade80, #10b981);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .header p { color: #cbd5e1; font-size: 1.1rem; }
+    .targets {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .target-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .target-card .label { color: #94a3b8; font-size: 0.875rem; margin-bottom: 4px; }
+    .target-card .value { color: #4ade80; font-size: 1.75rem; font-weight: bold; }
+    .target-card .sublabel { color: #64748b; font-size: 0.75rem; }
+    .critical-section {
+      background: linear-gradient(to right, #f59e0b, #ea580c);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .critical-section h2 { font-size: 1.75rem; margin-bottom: 15px; }
+    .critical-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+    }
+    .critical-item {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .critical-item h3 { font-weight: bold; margin-bottom: 6px; }
+    .critical-item p { font-size: 0.9rem; opacity: 0.95; }
+    .quarter {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+    }
+    .quarter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .quarter-header h2 { font-size: 1.75rem; margin-bottom: 4px; }
+    .quarter-header .focus { color: #94a3b8; }
+    .quarter-revenue .label { color: #94a3b8; font-size: 0.875rem; }
+    .quarter-revenue .value { color: #4ade80; font-size: 1.75rem; font-weight: bold; }
+    .quarter-revenue .breakdown { color: #64748b; font-size: 0.75rem; margin-top: 4px; }
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .goals-section h3 {
+      font-weight: bold;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .goals-section.f2f h3 { color: #60a5fa; }
+    .goals-section.subscription h3 { color: #a78bfa; }
+    .goal-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .goal-item:hover { background: rgba(71, 85, 105, 0.3); }
+    .goal-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .goal-text { flex: 1; }
+    .goal-text.checked { text-decoration: line-through; color: #64748b; }
+    .goal-detail {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      margin-top: 6px;
+    }
+    .reality-check {
+      background: rgba(153, 27, 27, 0.3);
+      border: 1px solid rgba(239, 68, 68, 0.5);
+      border-radius: 12px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    .reality-check h3 { color: #f87171; font-size: 1.5rem; margin-bottom: 15px; }
+    .reality-check p { color: #cbd5e1; margin-bottom: 10px; }
+    .reality-check ul {
+      list-style: disc;
+      margin-left: 20px;
+      color: #cbd5e1;
+      margin-bottom: 15px;
+    }
+    .reality-check ul li { margin-bottom: 6px; font-size: 0.9rem; }
+    .reality-check .final { font-weight: bold; margin-top: 15px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>$0 → $1,000,000 Net Worth</h1>
+      <p>12-Month Action Plan | Target: December 31, 2026</p>
+    </div>
+
+    <div class="targets">
+      <div class="target-card">
+        <div class="label">Q1 (Jan-Mar)</div>
+        <div class="value">$50k</div>
+        <div class="sublabel">Net Worth Target</div>
+      </div>
+      <div class="target-card">
+        <div class="label">Q2 (Apr-Jun)</div>
+        <div class="value">$200k</div>
+        <div class="sublabel">Net Worth Target</div>
+      </div>
+      <div class="target-card">
+        <div class="label">Q3 (Jul-Sep)</div>
+        <div class="value">$550k</div>
+        <div class="sublabel">Net Worth Target</div>
+      </div>
+      <div class="target-card">
+        <div class="label">Q4 (Oct-Dec)</div>
+        <div class="value">$1,000k</div>
+        <div class="sublabel">Net Worth Target</div>
+      </div>
+    </div>
+
+    <div class="critical-section">
+      <h2>Critical Success Factors</h2>
+      <div class="critical-grid">
+        <div class="critical-item">
+          <h3>Hire Fast, Fire Fast</h3>
+          <p>Your F2F business scales with people. Don't keep underperformers.</p>
+        </div>
+        <div class="critical-item">
+          <h3>Content is Your Leverage</h3>
+          <p>30 min/day creating content = infinite upside on subscription business</p>
+        </div>
+        <div class="critical-item">
+          <h3>Reinvest Aggressively</h3>
+          <p>Every dollar of F2F profit goes into ads, team, or product until December</p>
+        </div>
+        <div class="critical-item">
+          <h3>Focus on F2F Sales Training</h3>
+          <p>Proven expertise + hungry audience + B2B money. Dating niche is riskier.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quarter">
+      <div class="quarter-header">
+        <div>
+          <h2>Q1 (Jan-Mar)</h2>
+          <p class="focus">Foundation & Launch</p>
+        </div>
+        <div class="quarter-revenue">
+          <div class="label">Revenue Target</div>
+          <div class="value">$87k</div>
+          <div class="breakdown">F2F: $87k | Sub: $0k</div>
+        </div>
+      </div>
+      <div class="goals-grid">
+        <div class="goals-section f2f">
+          <h3>👥 F2F Fundraising Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Hire 2 staff members (Month 1-2)</div>
+              <div class="goal-detail">Target: Each doing 10 sales/week = $8k/month revenue, $3.6k/month profit per person</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Build recruitment pipeline</div>
+              <div class="goal-detail">Post ads, screen 20+ candidates, perfect onboarding process</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Document training system</div>
+              <div class="goal-detail">Create sales scripts, objection handling, territory management</div>
+            </div>
+          </div>
+        </div>
+        <div class="goals-section subscription">
+          <h3>📈 Subscription Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Choose niche: F2F Sales Training</div>
+              <div class="goal-detail">Best overlap of expertise + monetization potential. Dating advice is high-risk for payment processing</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Build social media presence</div>
+              <div class="goal-detail">Post daily: LinkedIn (B2B sales tips), Instagram/TikTok (field clips), YouTube (longer training)</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Create lead magnet</div>
+              <div class="goal-detail">Free '7-Day Door Knock Blueprint' to capture emails</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Launch MVP course by March</div>
+              <div class="goal-detail">Pre-sell at $297-497. Target: 50 students = $15-25k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quarter">
+      <div class="quarter-header">
+        <div>
+          <h2>Q2 (Apr-Jun)</h2>
+          <p class="focus">Scale Both Engines</p>
+        </div>
+        <div class="quarter-revenue">
+          <div class="label">Revenue Target</div>
+          <div class="value">$201k</div>
+          <div class="breakdown">F2F: $156k | Sub: $45k</div>
+        </div>
+      </div>
+      <div class="goals-grid">
+        <div class="goals-section f2f">
+          <h3>👥 F2F Fundraising Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Hire 3 more staff (Total: 5)</div>
+              <div class="goal-detail">Stagger hiring - one per month to maintain quality</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Implement performance bonuses</div>
+              <div class="goal-detail">Incentivize top performers, reduce turnover</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Open second territory/city</div>
+              <div class="goal-detail">If local market saturating, expand geographic reach</div>
+            </div>
+          </div>
+        </div>
+        <div class="goals-section subscription">
+          <h3>📈 Subscription Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Hit 5,000 followers</div>
+              <div class="goal-detail">Consistent posting + engage in communities</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Launch monthly membership</div>
+              <div class="goal-detail">$97/month: Live calls, community, deal reviews. Target: 150 members = $14.5k/mo</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Run first paid ads</div>
+              <div class="goal-detail">Small budget $500-1k/month to test funnels</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Create advanced course</div>
+              <div class="goal-detail">$997-1997 tier for serious professionals</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quarter">
+      <div class="quarter-header">
+        <div>
+          <h2>Q3 (Jul-Sep)</h2>
+          <p class="focus">Optimize & Expand</p>
+        </div>
+        <div class="quarter-revenue">
+          <div class="label">Revenue Target</div>
+          <div class="value">$369k</div>
+          <div class="breakdown">F2F: $234k | Sub: $135k</div>
+        </div>
+      </div>
+      <div class="goals-grid">
+        <div class="goals-section f2f">
+          <h3>👥 F2F Fundraising Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Hire team leader/manager</div>
+              <div class="goal-detail">Free up your time - you focus on recruitment + subscription business</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Grow to 8-10 staff</div>
+              <div class="goal-detail">10 people × 10 sales × $200 × 4 weeks = $80k/month revenue</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Systematize everything</div>
+              <div class="goal-detail">SOPs, CRM, performance dashboards - business runs without you</div>
+            </div>
+          </div>
+        </div>
+        <div class="goals-section subscription">
+          <h3>📈 Subscription Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Scale to 400 members</div>
+              <div class="goal-detail">400 × $97 = $38.8k/month recurring</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Sell 50 high-ticket courses</div>
+              <div class="goal-detail">50 × $1500 avg = $75k</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Increase ad spend to $3-5k/month</div>
+              <div class="goal-detail">Should be profitable by now - scale what works</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Launch done-for-you service</div>
+              <div class="goal-detail">$3-5k offer: Build sales teams for other businesses</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quarter">
+      <div class="quarter-header">
+        <div>
+          <h2>Q4 (Oct-Dec)</h2>
+          <p class="focus">Push to $1M</p>
+        </div>
+        <div class="quarter-revenue">
+          <div class="label">Revenue Target</div>
+          <div class="value">$582k</div>
+          <div class="breakdown">F2F: $312k | Sub: $270k</div>
+        </div>
+      </div>
+      <div class="goals-grid">
+        <div class="goals-section f2f">
+          <h3>👥 F2F Fundraising Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>12-15 staff at peak</div>
+              <div class="goal-detail">Maximize before year-end push</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Bonus incentives for Q4</div>
+              <div class="goal-detail">Push hard in final quarter</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Explore acquisition</div>
+              <div class="goal-detail">Buy a competitor's book of business or team</div>
+            </div>
+          </div>
+        </div>
+        <div class="goals-section subscription">
+          <h3>📈 Subscription Business</h3>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>600+ members</div>
+              <div class="goal-detail">600 × $97 = $58.2k/month</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Host live event</div>
+              <div class="goal-detail">2-day workshop at $2-3k per person. Target: 30-50 attendees = $60-150k</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Launch app MVP (optional)</div>
+              <div class="goal-detail">If time/resources allow - gamified sales training app</div>
+            </div>
+          </div>
+          <div class="goal-item" onclick="toggleCheck(this)">
+            <input type="checkbox">
+            <div class="goal-text">
+              <div>Black Friday/Cyber Monday push</div>
+              <div class="goal-detail">Stack offers, massive promo - goal $100k+ in 5 days</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reality-check">
+      <h3>Reality Check</h3>
+      <p>This is an extremely aggressive goal. Here's what needs to go right:</p>
+      <ul>
+        <li>You need to work 70-80 hour weeks consistently</li>
+        <li>F2F business must scale perfectly (hiring, retention, performance)</li>
+        <li>Subscription product must hit on first or second iteration</li>
+        <li>You'll need to invest almost all profits back into the business</li>
+        <li>Personal expenses need to stay low (keep living lean)</li>
+      </ul>
+      <p class="final">More realistic target: $300-500k by year-end. But shoot for $1M - even if you hit 60%, you'll be way ahead.</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleCheck(element) {
+      const checkbox = element.querySelector('input[type="checkbox"]');
+      const textDiv = element.querySelector('.goal-text > div:first-child');
+      checkbox.checked = !checkbox.checked;
+      if (checkbox.checked) {
+        textDiv.parentElement.classList.add('checked');
+      } else {
+        textDiv.parentElement.classList.remove('checked');
+      }
+    }
+  </script>
+</body>
+</html>
